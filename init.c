@@ -7,7 +7,8 @@
 
 void print_prompt(void)
 {
-	char prompt = "$ ";
+	char *prompt = "$ ";
+
 	printf("%s", prompt);
 }
 
@@ -19,16 +20,14 @@ void print_prompt(void)
 
 char *read_input(void)
 {
-	char *buffer;
+	char *buffer = NULL;
 	size_t size = 0;
 
-	if(getline(&buffer, &size, stdin) == -1)
+	if (getline(&buffer, &size, stdin) == -1)
 	{
+
+		printf("%s\n", "exiting shell");
 		exit(EXIT_SUCCESS);
-	}
-	else
-	{
-		exit(EXIT_FAILURE);
 	}
 
 	return (buffer);
