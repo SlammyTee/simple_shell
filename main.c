@@ -9,7 +9,6 @@ int main(void)
 {
 	char *str;
 	char **cmd;
-
 	while (1)
 	{
 		print_prompt();
