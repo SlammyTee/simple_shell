@@ -9,11 +9,13 @@ void simple_exec(char **cmd)
 {	
 	pid_t pid;
 	int status;
-	char *envp[] = {"PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",NULL};
+	char *full_str;
+	full_str = "usr/bin/";
 	pid = fork();
 	if (pid == 0)
-	{
-		if (execve(getFullPath(cmd),cmd,envp) == -1)
+	{	
+		strcat(full_str,cmd[0]);
+		if (execve(full_str ,cmd ,NULL) == -1)
 		{
 			perror("Error");
 		}
