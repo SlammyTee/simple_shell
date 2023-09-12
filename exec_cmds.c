@@ -6,29 +6,91 @@
  */
 
 void simple_exec(char **cmd)
-{	
+{
 	pid_t pid;
-	int status;
-	char *envp[] = {"PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",NULL};
+
 	pid = fork();
-	if (pid == 0)
+	if (pid == -1)
 	{
-		if (execve(getFullPath(cmd),cmd,envp) == -1)
+		perror("forking failed");
+	}
+
+	else if (pid == 0)
+	{
+		if (execvp(cmd[0], cmd) == -1)
 		{
 			perror("Error");
 		}
 		exit(EXIT_FAILURE);
 	}
-	else if (pid < 0)
+	else
 	{
-		perror("Error");
+		wait(NULL);
+		return;
 	}
-	else 
+}
+
+/**
+ * exec_piped - executes piped commands
+ * @cmd: command input
+ */
+void exec_piped(char **cmd)
+{
+	int pipefd[2];
+	pid_t p1, p2;
+	char **parsedpipe = strtok(&cmd, "|");
+
+	if (pipe(pipefd) < 0)
 	{
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		perror("pipe could not be initialized");
+		return;
+	}
+	p1 = fork();
+	if (p1 == -1)
+	{
+		perror("forking failed");
+		return;
 	}
 
+	else if (p1 == 0)
+	{
+		close(pipefd[0]);
+		dup2(pipefd[1], STDOUT_FILENO);
+		close(pipefd[1]);
+
+		if (execvp(cmd[0], cmd) == -1)
+		{
+			perror("Could not execute command 1..");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		p2 = fork();
+
+		if (p2 == -1)
+		{
+			perror("forking failed");
+			return;
+		}
+
+		if (p2 == 0)
+		{
+			close(pipefd[1]);
+			dup2(pipefd[0], STDIN_FILENO);
+			close(pipefd[0]);
+			if (execvp(parsedpipe[0], parsedpipe) < 0)
+			{
+				perror("failed to execute");
+				exit(0);
+			}
+		}
+		else
+		{
+			wait(NULL);
+			wait(NULL);
+		}
+	}
 }
+
 

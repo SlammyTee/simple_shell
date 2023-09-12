@@ -9,13 +9,14 @@ int main(void)
 {
 	char *str;
 	char **cmd;
+
 	while (1)
 	{
 		print_prompt();
 		str = read_input();
 		cmd = split_str(str);
-		simple_exec(cmd);
-	
+	/*	simple_exec(cmd);*/
+
 
 	}
 
