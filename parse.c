@@ -43,13 +43,14 @@ int is_pipe(char **parsed)
 
 	while (parsed)
 	{
-		if ((strcmp(parsed[i], '|')) == 0)
+		if ((strcmp(parsed[i], "|")) == 0)
 		{
 			return (1);
 		}
 		else
 			return (0);
 	}
+	return (0);
 }
 
 
