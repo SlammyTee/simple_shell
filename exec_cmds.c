@@ -34,11 +34,39 @@ void simple_exec(char **cmd)
  * exec_piped - executes piped commands
  * @cmd: command input
  */
-/*void exec_piped(char **cmd)*/
-/*{ */
-/*	int pipefd[2]; */
-/*	pid_t p1, p2;*/
 
-/*} */
+void exec_piped(char **cmd)
+{
+	int fd[2];
+	pid_t p1;
 
+	pipe(fd);
 
+	p1 = fork();
+	if (p1 == -1)
+	{
+		perror("forking failed");
+		exit(EXIT_FAILURE);
+	}
+	else if (p1 == 0)
+	{
+		close(fd[1]);
+		dup2(fd[0], 0);
+		if (execvp(cmd[0], cmd) == -1)
+		{
+			perror("Error");
+		}
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		close(fd[0]);
+		dup2(fd[1], 1);
+		if (execvp(cmd[3], cmd) == -1)
+		{
+			perror("Error");
+		}
+		exit(EXIT_FAILURE);
+	}
+
+}

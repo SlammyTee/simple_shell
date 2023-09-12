@@ -13,7 +13,7 @@ char **split_str(char *str)
 	int i = 0, len = 0;
 
 	len = strlen(str);
-	parsed = malloc(sizeof(char) * len);
+	parsed = malloc(sizeof(char *) * len);
 	if (parsed == NULL)
 	{
 		perror("tsh: memory allocation error");
@@ -24,8 +24,19 @@ char **split_str(char *str)
 	while (tokens != NULL)
 	{
 		parsed[i] = tokens;
-		i++;
 		tokens = strtok(NULL, DELIM);
+		i++;
+
+		if (i >= len)
+		{
+			len += 64;
+			parsed = realloc(parsed, sizeof(char *) * len);
+			if (parsed == NULL)
+			{
+				perror("tsh: memory allocation error");
+				exit(EXIT_FAILURE);
+			}
+		}
 	}
 	parsed[i] = NULL;
 	return (parsed);
@@ -47,8 +58,7 @@ int is_pipe(char **parsed)
 		{
 			return (1);
 		}
-		else
-			return (0);
+		i++;
 	}
 	return (0);
 }

@@ -9,13 +9,20 @@ int main(void)
 {
 	char *str;
 	char **cmd;
+	int status;
 
 	while (1)
 	{
 		print_prompt();
 		str = read_input();
 		cmd = split_str(str);
-	/*	simple_exec(cmd);*/
+/*		simple_exec(cmd); */
+		status = is_pipe(cmd);
+		if (status == 1)
+			exec_piped(cmd);
+		else
+			simple_exec(cmd);
+
 
 
 	}

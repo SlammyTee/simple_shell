@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 
 #define DELIM " \n\""
 
@@ -15,5 +16,7 @@ void print_prompt(void);
 char **split_str(char *str);
 void simple_exec(char **cmd);
 char *getFullPath(char **cmd);
+int is_pipe(char **cmd);
+void exec_piped(char **cmd);
 
 #endif
