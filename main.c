@@ -16,15 +16,14 @@ int main(void)
 		print_prompt();
 		str = read_input();
 		cmd = split_str(str);
-/*		simple_exec(cmd); */
-		status = is_pipe(cmd);
-		if (status == 1)
-			exec_piped(cmd);
-		else
+
+		status = is_builtin(cmd);
+		if (status == 0)
+		{
 			simple_exec(cmd);
-
-
-
+		}
+		else
+			exec_builtin(cmd);
 	}
 
 	free(str);
