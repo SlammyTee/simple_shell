@@ -17,7 +17,7 @@ char *str_tok(char *str1)
 			continue;
 		}else{	
 		str_arr[i] = *str1;
-		str++;
+		str1++;
 		}
 	}
 	for(i = 0 ; i <= len ; i++){
