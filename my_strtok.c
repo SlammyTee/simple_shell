@@ -13,18 +13,22 @@ char *str_tok(char *str1)
 	char token[10];
 	int i , len = strlen(str1);
 	for (i = 0 ; i <= len; i++){
+		if ( *str1 == ' ' ){
+			continue;
+		}else{	
 		str_arr[i] = *str1;
 		str++;
+		}
 	}
-	for(i = 0 ; i <= strlen(str_arr) ; i++){
+	for(i = 0 ; i <= len ; i++){
 		if (str_arr[i] == ' ' || str_arr[i] == '\n' || str_arr[i] == '|'){
-			str_arr[i] = NULL;
+			//str_arr[i] = NULL;
 			break;
 		}else{
 			token[i] = str_arr[i];
 		}
 	}
 	token_ptr = token;
-	str = str + strlen(token);
+	str = str + strlen(token) + 1;
 	return token_ptr;
 }
