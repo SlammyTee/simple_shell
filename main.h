@@ -10,7 +10,7 @@
 
 #define DELIM " \n\""
 extern char **environ;
-extern char *str;
+extern char *st;
 
 char *read_input(void);
 void print_prompt(void);
