@@ -22,7 +22,7 @@ char *str_tok(char *str1)
 	}
 	for(i = 0 ; i <= len ; i++){
 		if (str_arr[i] == ' ' || str_arr[i] == '\n' || str_arr[i] == '|'){
-			//str_arr[i] = NULL;
+			str_arr[i] = NULL;
 			break;
 		}else{
 			token[i] = str_arr[i];
