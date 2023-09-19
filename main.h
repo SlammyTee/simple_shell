@@ -23,7 +23,7 @@ void cd_def(char *dir);
 void get_env(void);
 int is_builtin(char **cmd);
 void exec_builtin(char **cmd);
-char *str_tok(char *str1, char *str2);
+char *str_tok(char *str1);
 
 
 #endif
