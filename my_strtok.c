@@ -22,7 +22,7 @@ char *str_tok(char *str1)
 	}
 	for(i = 0 ; i <= len ; i++){
 		if (str_arr[i] == ' ' || str_arr[i] == '\n' || str_arr[i] == '|'){
-			str_arr[i] = NULL;
+	
 			break;
 		}else{
 			token[i] = str_arr[i];
@@ -30,5 +30,5 @@ char *str_tok(char *str1)
 	}
 	token_ptr = token;
 	st = st + strlen(token) + 1;
-	returnf token_ptr;
+	return token_ptr;
 }
