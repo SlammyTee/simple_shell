@@ -8,7 +8,7 @@
 
 char *str_tok(char *str1)
 {
-	char *token_ptr,
+	char *token_ptr;
 	char str_arr[20];
 	char token[10];
 	int i , len = strlen(str1);
