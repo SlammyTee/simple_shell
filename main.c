@@ -8,14 +8,15 @@
 
 int main(void)
 {
+	char *str1;
 	char **cmd;
 	int status;
 
 	while (1)
 	{
 		print_prompt();
-		str = read_input();
-		cmd = split_str(str);
+		str1 = read_input();
+		cmd = split_str(str1);
 
 		status = is_builtin(cmd);
 		if (status == 0)
