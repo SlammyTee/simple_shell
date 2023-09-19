@@ -5,7 +5,7 @@
  * Return: 0 on success
  */
 
-char *str;
+extern char *str;
 
 int main(void)
 {
