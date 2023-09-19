@@ -6,16 +6,25 @@
 *@str1: string input to be tokenized 
 */
 
-char *str_tok(char *str1 , char *str2)
+char *str_tok(char *str1)
 {
-	char *temp_str;
-	char *sub_str;
-	char *delim_ptr = strchr(str1 , DELIM);
-	if (*delim_ptr == DELIM)
-		*delim_ptr = '\0';
-	temp_str = str1;
-	sub_str = temp_str;
-	delim_ptr++;
-	str1 = delim_ptr;
-	return sub_str;
+	char *token_ptr,
+	char str_arr[20];
+	char token[10];
+	int i , len = strlen(str1);
+	for (i = 0 ; i <= len; i++){
+		str_arr[i] = *str1;
+		str++;
+	}
+	for(i = 0 ; i <= strlen(str_arr) ; i++){
+		if (str_arr[i] == ' ' || str_arr[i] == '\n' || str_arr[i] == '|'){
+			str_arr[i] = NULL;
+			break;
+		}else{
+			token[i] = str_arr[i];
+		}
+	}
+	token_ptr = token;
+	str = str + strlen(token);
+	return token_ptr;
 }
