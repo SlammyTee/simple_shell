@@ -5,9 +5,10 @@
  * Return: 0 on success
  */
 
+char *str;
+
 int main(void)
 {
-	char *str;
 	char **cmd;
 	int status;
 
