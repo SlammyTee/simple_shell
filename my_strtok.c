@@ -29,6 +29,6 @@ char *str_tok(char *str1)
 		}
 	}
 	token_ptr = token;
-	//str = str + strlen(token) + 1;
+	str = str + strlen(token) + 1;
 	return token_ptr;
 }
