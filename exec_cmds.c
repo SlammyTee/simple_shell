@@ -8,6 +8,7 @@
 void simple_exec(char **cmd)
 {
 	pid_t pid;
+	char *path;
 
 	pid = fork();
 	if (pid == -1)
@@ -17,7 +18,8 @@ void simple_exec(char **cmd)
 
 	else if (pid == 0)
 	{
-		if (execvp(cmd[0], cmd) == -1)
+		path = find_path(cmd[0]);
+		if (execve(path, cmd, NULL) == -1)
 		{
 			perror("Error");
 		}
@@ -39,7 +41,9 @@ void exec_piped(char **cmd)
 {
 	int fd[2];
 	pid_t p1;
+	char *path;
 
+	path = find_path(cmd[0]);
 	pipe(fd);
 
 	p1 = fork();
@@ -52,7 +56,7 @@ void exec_piped(char **cmd)
 	{
 		close(fd[1]);
 		dup2(fd[0], 0);
-		if (execvp(cmd[0], cmd) == -1)
+		if (execve(path, cmd, NULL) == -1)
 		{
 			perror("Error");
 		}
@@ -62,7 +66,7 @@ void exec_piped(char **cmd)
 	{
 		close(fd[0]);
 		dup2(fd[1], 1);
-		if (execvp(cmd[3], cmd) == -1)
+		if (execve(path, cmd, NULL) == -1)
 		{
 			perror("Error");
 		}

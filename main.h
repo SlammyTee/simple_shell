@@ -24,7 +24,9 @@ void cd_def(char *dir);
 void get_env(void);
 int is_builtin(char **cmd);
 void exec_builtin(char **cmd);
-char *str_tok(char *str1);
-
+/*int _unsetenv(const char *name);*/
+/*int _setenv(const char *name, const char *value, int overwrite);*/
+char *find_path(char *cmd);
+/*char *str_tok(char *str1);*/
 
 #endif

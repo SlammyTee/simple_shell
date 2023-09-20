@@ -62,4 +62,13 @@ void exec_builtin(char **cmd)
 	{
 		get_env();
 	}
+	else if (match == 4)
+	{
+	/*	_setenv(cmd[1], cmd[2], cmd[3]);*/
+
+	}
+	else if (match == 5)
+	{
+	/*	_unsetenv(cmd[1]);*/
+	}
 }
