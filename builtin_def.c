@@ -6,7 +6,8 @@
  */
 void cd_def(char *dir)
 {
-	char *prev = NULL;
+	char *prev, buffer[1024];
+
 
 	if (dir == NULL)
 	{
@@ -14,14 +15,14 @@ void cd_def(char *dir)
 	}
 	else if (strcmp(dir, "-") == 0)
 	{
-		prev = getcwd(prev, 0);
+		prev = getcwd(buffer, 1024);
 		chdir(prev);
 	}
 	else
 	{
 		if (chdir(dir) != 0)
 		{
-			perror("Error: Error when changing directory to PATH.");
+			perror("Error: couldn't cd into directory\n");
 		}
 	}
 }
@@ -43,3 +44,4 @@ void get_env(void)
 		var = environ[i];
 	}
 }
+
