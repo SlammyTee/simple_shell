@@ -10,6 +10,7 @@
 
 #define DELIM " \n\""
 extern char **environ;
+extern char *st;
 
 char *read_input(void);
 void print_prompt(void);
@@ -26,7 +27,6 @@ void exec_builtin(char **cmd);
 /*int _unsetenv(const char *name);*/
 /*int _setenv(const char *name, const char *value, int overwrite);*/
 char *find_path(char *cmd);
-
-
+char *str_tok(char *str1);
 
 #endif

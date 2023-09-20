@@ -6,25 +6,25 @@
  * Return: parsed words / commands
  */
 
-char **split_str(char *str)
+char **split_str(char *str1)
 {
 	char **parsed;
 	char *tokens;
 	int i = 0, len = 0;
 
-	len = strlen(str);
+	len = strlen(str1);
 	parsed = malloc(sizeof(char *) * len);
 	if (parsed == NULL)
 	{
 		perror("tsh: memory allocation error");
 		exit(EXIT_FAILURE);
 	}
-	tokens = strtok(str, DELIM);
+	tokens = strtok(str1,DELIM);
 
 	while (tokens != NULL)
 	{
 		parsed[i] = tokens;
-		tokens = strtok(NULL, DELIM);
+		tokens = strtok(NULL,DELIM);
 		i++;
 
 		if (i >= len)
