@@ -64,11 +64,11 @@ void exec_builtin(char **cmd)
 	}
 	else if (match == 4)
 	{
-	/*	_setenv(cmd[1], cmd[2], cmd[3]);*/
+		_setenv(cmd[1], cmd[2]);
 
 	}
 	else if (match == 5)
 	{
-	/*	_unsetenv(cmd[1]);*/
+		_unsetenv(cmd[1]);
 	}
 }

@@ -30,7 +30,7 @@ char **split_str(char *str)
 		if (i >= len)
 		{
 			len += 64;
-			parsed = realloc(parsed, sizeof(char *) * len);
+			parsed = malloc(sizeof(char *) * len);
 			if (parsed == NULL)
 			{
 				perror("tsh: memory allocation error");
@@ -45,7 +45,7 @@ char **split_str(char *str)
 /**
  * is_pipe - checks for a pipe in the parsed command string
  * @parsed: parsed command input
- * Return: 1 if pipe was found, 0 otherwise
+ * Return: index of pipe found, 0 otherwise
  */
 
 int is_pipe(char **parsed)
@@ -56,14 +56,39 @@ int is_pipe(char **parsed)
 	{
 		if ((strcmp(parsed[i], "|")) == 0)
 		{
-			return (1);
+			return (i);
 		}
 		i++;
 	}
 	return (0);
 }
 
+/**
+ * parse_pipe - parse piped command input
+ * @parsed: parsed comand input
+ * @argv1: pointer to the the arguments before the pipe sign
+ * @argv2: pointer to the arguments after the pipe sign
+ */
 
+void parse_pipe(char **parsed, char **argv1, char **argv2)
+{
+	int index, i;
+
+	index = is_pipe(parsed);
+
+	for (i = 0; i < index; i++)
+	{
+		argv1[i] = strdup(parsed[i]);
+	}
+	argv1[i++] = NULL;
+
+	while (parsed[i] != NULL)
+	{
+		argv2[i - index] = strdup(parsed[i]);
+		i++;
+	}
+	argv2[i - index] = NULL;
+}
 
 
 

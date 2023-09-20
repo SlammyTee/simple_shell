@@ -14,6 +14,7 @@ char *find_path(char *cmd)
 	if (path == NULL)
 	{
 		perror("Error");
+		exit(EXIT_FAILURE);
 		return (NULL);
 	}
 
@@ -21,6 +22,7 @@ char *find_path(char *cmd)
 	if (copy == NULL)
 	{
 		perror("Error");
+		exit(EXIT_FAILURE);
 		return (NULL);
 	}
 
@@ -40,5 +42,6 @@ char *find_path(char *cmd)
 		token = strtok(NULL, ":");
 	}
 	free(copy);
+	exit(EXIT_FAILURE);
 	return (NULL);
 }
