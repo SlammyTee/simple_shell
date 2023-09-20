@@ -19,12 +19,12 @@ char **split_str(char *str1)
 		perror("tsh: memory allocation error");
 		exit(EXIT_FAILURE);
 	}
-	tokens = str_tok(str1);
+	tokens = strtok(str,DELIM);
 
 	while (tokens != NULL)
 	{
 		parsed[i] = tokens;
-		tokens = str_tok(NULL);
+		tokens = strtok(NULL,DELIM);
 		i++;
 
 		if (i >= len)
