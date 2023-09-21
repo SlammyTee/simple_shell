@@ -23,7 +23,7 @@ int main(int argc, char **argv, char **env)
 		print_prompt();
 		str = read_input();
 		cmd = split_str(str);
-		status = 0;
+		status = is_builtin(cmd);
 		if (status == 0)
 		{
 			simple_exec(cmd, env);
