@@ -55,9 +55,10 @@ void get_env(void)
 int _setenv(const char *name, const char *value)
 {
 	char *var;
-	int i;
+	int i = 0;
 
-	if (name == NULL || name[0] == '\0' || strchr(name, '=') != NULL || value == NULL)
+	if (name == NULL || name[0] == '\0' ||
+			strchr(name, '=') != NULL || value == NULL)
 	{
 		fprintf(stderr, "%s", "error expected 2 arguments\n");
 		return (-1);
@@ -78,7 +79,6 @@ int _setenv(const char *name, const char *value)
 	}
 	else
 	{
-		i = 0;
 		while (environ[i])
 		{
 			i++;
@@ -102,6 +102,7 @@ void replace_env(char *var)
 		fprintf(stderr, "%s\n", "Error: setting environment variable failure");
 	}
 }
+
 
 /**
  * _unsetenv - unsets / deletes environment variable
