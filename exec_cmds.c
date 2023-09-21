@@ -8,6 +8,7 @@
 void simple_exec(char **cmd)
 {
 	char *path;
+
 	if (cmd)
 	{
 		path = find_path(cmd[0]);
