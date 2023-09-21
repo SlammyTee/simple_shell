@@ -3,21 +3,35 @@
 /**
  * simple_exec - executes simple commands
  * @cmd: command to be executed
+ * @env: environment variable
  */
 
-void simple_exec(char **cmd)
+void simple_exec(char **cmd, char **env)
 {
 	char *path;
+	int status;
+	pid_t p = fork();
 
-	if (cmd)
+	if (p == 0)
 	{
-		path = find_path(cmd[0]);
-		if (execve(path, cmd, NULL) == -1)
+		path = find_path(cmd);
+
+		if (execve(path, cmd, env) == -1)
 		{
 			perror("Error:");
 			exit(EXIT_FAILURE);
 		}
 	}
-	exit(EXIT_FAILURE);
+
+	else if (p < 0)
+	{
+		perror("forking failed");
+		exit(EXIT_FAILURE);
+	}
+
+	else
+	{
+		waitpid(p, &status, 0);
+	}
 }
 

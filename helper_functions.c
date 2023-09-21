@@ -24,15 +24,20 @@ int str_len(char *str)
  */
 char *str_cpy(char *dest, char *src)
 {
-	char *aux = dest;
+	int i = 0;
 
-	while (*src)
-		*dest++ = *src++;
-	return (aux);
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+
 }
 
 /**
- * str_cat - function to concatenates two strings.
+ * str_cat - concatenates two strings.
  * @dest: a string input
  * @src: a string input
  * Return: A pointer to the result string
@@ -50,3 +55,39 @@ char *str_cat(char *dest, char *src)
 	*dest = '\0';
 	return (temp);
 }
+
+
+/**
+ * _strcmp - compares two string
+ * @s1: first string input
+ * @s2: second string input
+ * Return: 0 if same , 1 otherwise
+ */
+int _strcmp(char *s1, char *s2)
+{
+	int cmp = 0, i, len1, len2;
+
+	len1 = str_len(s1);
+	len2 = str_len(s2);
+
+	if (s1 == NULL || s2 == NULL)
+		return (1);
+
+	if (len1 != len2)
+		return (1);
+
+	for (i = 0; s1[i]; i++)
+	{
+		if (s1[i] != s2[i])
+		{
+			cmp = s1[i] - s2[i];
+			break;
+		}
+		else
+			continue;
+
+	}
+	return (cmp);
+}
+
+

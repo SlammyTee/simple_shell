@@ -11,11 +11,11 @@ void cd_def(char *dir)
 
 	if (dir == NULL)
 	{
-		chdir("$HOME");
+		chdir(getenv("HOME"));
 	}
 	else if (strcmp(dir, "-") == 0)
 	{
-		prev = getcwd(buffer, 1024);
+		prev = getenv("OLDPWD");
 		chdir(prev);
 	}
 	else
@@ -23,7 +23,13 @@ void cd_def(char *dir)
 		if (chdir(dir) != 0)
 		{
 			perror("Error: couldn't cd into directory\n");
+			exit(EXIT_FAILURE);
 		}
+		getcwd(buffer, sizeof(buffer));
+		setenv("OLDPWD", getenv("PWD"), 1);
+		setenv("PWD", buffer, 1);
+
+
 	}
 }
 
@@ -34,12 +40,14 @@ void cd_def(char *dir)
 void get_env(void)
 {
 	char *var;
-	int i = 0;
+	int i = 0, len;
 
 	var = environ[i];
 	while (var)
 	{
-		printf("%s\n", var);
+		len = strlen(var);
+		write(1, var, len);
+		write(STDOUT_FILENO, "\n", 1);
 		i++;
 		var = environ[i];
 	}

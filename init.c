@@ -7,9 +7,11 @@
 
 void print_prompt(void)
 {
-	char *prompt = "$ ";
-
-	printf("%s", prompt);
+	if (isatty(STDIN_FILENO))
+	{
+		write(STDOUT_FILENO, "$ ", 3);
+		fflush(stdout);
+	}
 }
 
 /**
@@ -24,33 +26,9 @@ char *read_input(void)
 
 	if (getline(&buffer, &size, stdin) == -1)
 	{
-
-		printf("%s\n", "exiting shell");
+		free(buffer);
 		exit(EXIT_SUCCESS);
 	}
-	buffer = replace_newline(buffer);
 
 	return (buffer);
 }
-
-/**
- * replace_newline - searches for a newline character and
- * replaces it with an end of line character
- * @line: string read from the terminal
- * Return: line
- */
-
-char *replace_newline(char *line)
-{
-	int i = 0;
-
-	while (line[i] != '\n')
-	{
-		i++;
-	}
-
-	line[i] = '\0';
-
-	return (line);
-}
-

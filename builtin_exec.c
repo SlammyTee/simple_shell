@@ -1,33 +1,6 @@
 #include "main.h"
 
 /**
- * is_builtin - checks if a command is a built in command
- * @cmd: command input
- * Return: 2 if builtin, 0 otherwise
- */
-int is_builtin(char **cmd)
-{
-	int i;
-	char *builtin_cmds[] = {
-		"cd",
-		"exit",
-		"env",
-		"setenv",
-		"unsetenv"};
-
-	for (i = 0; i < 5; i++)
-	{
-		if (strcmp(cmd[0], builtin_cmds[i]) == 0)
-		{
-			return (2);
-		}
-	}
-
-	return (0);
-}
-
-
-/**
  * exec_builtin - executes a builtin command
  * @cmd: command input
  */
@@ -72,3 +45,30 @@ void exec_builtin(char **cmd)
 		_unsetenv(cmd[1]);
 	}
 }
+
+/**
+ * is_builtin - checks if a command is a built in command
+ * @cmd: command input
+ * Return: 2 if builtin, 0 otherwise
+ */
+int is_builtin(char **cmd)
+{
+	int i;
+	char *builtin_cmds[] = {
+		"cd",
+		"exit",
+		"env",
+		"setenv",
+		"unsetenv"};
+
+	for (i = 0; i < 5; i++)
+	{
+		if (strcmp(cmd[0], builtin_cmds[i]) == 0)
+		{
+			return (2);
+		}
+	}
+
+	return (0);
+}
+
