@@ -21,40 +21,15 @@ void print_prompt(void)
 
 char *read_input(void)
 {
-	char *buffer, *buf, ch = 0;
-	int i, size = 1024, rd;
+	char *buffer = NULL;
+	size_t size = 0;
 
-	buffer = malloc(size);
-	if (buffer == NULL)
+	if (getline(&buffer, &size, stdin) == -1)
 	{
 		free(buffer);
-		return (NULL);
+		exit(EXIT_SUCCESS);
 	}
-	for (i = 0; ch != EOF && ch != '\n'; i++)
-	{
-		fflush(stdin);
-		rd = read(STDIN_FILENO, &ch, 1);
-		if (rd == 0)
-		{
-			free(buffer);
-			exit(EXIT_SUCCESS);
-		}
-		buffer[i] = ch;
-		if (buffer[0] == '\n')
-			return (empty(buffer));
-		if (i >= size)
-		{
-			buffer = realloc(buffer, (size + 2));
-			if (buffer == NULL)
-			{
-				free(buffer);
-				return (NULL);
-			}
-		}
-	}
-	buffer[i] = '\0';
-	buf = remove_space(buffer);
-	return (buf);
+	return (buffer);
 }
 
 /**
