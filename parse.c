@@ -17,6 +17,7 @@ char **split_str(char *str)
 	parsed = malloc(sizeof(char *) * len);
 	if (parsed == NULL)
 	{
+		free(parsed);
 		perror("tsh: memory allocation error");
 		exit(EXIT_FAILURE);
 	}
@@ -34,11 +35,13 @@ char **split_str(char *str)
 			parsed = malloc(sizeof(char *) * len);
 			if (parsed == NULL)
 			{
+				free(parsed);
 				perror("tsh: memory allocation error");
 				exit(EXIT_FAILURE);
 			}
 		}
 	}
+	free(tokens);
 	parsed[i] = NULL;
 	return (parsed);
 }

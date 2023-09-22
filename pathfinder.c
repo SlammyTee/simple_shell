@@ -44,6 +44,7 @@ char *find_path(char **cmd)
 			token = strtok(NULL, ":");
 		}
 	}
+	free(token);
 	free(copy);
 	return (NULL);
 }

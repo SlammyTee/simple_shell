@@ -29,7 +29,8 @@ int str_len(char *str);
 char *str_cpy(char *dest, char *src);
 char *str_cat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-/*char *_getline(void);*/
-/*char *str_tok(char *str1);*/
+char *empty(char *input);
+char *remove_space(char *input);
+void hashSign(char *input);
 
 #endif

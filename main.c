@@ -30,9 +30,8 @@ int main(int argc, char **argv, char **env)
 		}
 		else
 			exec_builtin(cmd);
+		free(str);
+		free(cmd);
 	}
-
-	free(str);
-	free(cmd);
 	return (0);
 }
